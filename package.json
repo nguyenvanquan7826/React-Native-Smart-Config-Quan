@@ -1,6 +1,6 @@
 {
   "name": "react-native-smartconfig-quan",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "no",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -13,7 +13,7 @@
     "android",
     "ios",
     "cpp",
-    "react-native-smartconfig-swjava.podspec",
+      "react-native-smartconfig-quan.podspec",
     "!lib/typescript/example",
     "!**/__tests__",
     "!**/__fixtures__",
