@@ -1,6 +1,6 @@
 # react-native-smartconfig-quan
 
-This library works both android and ios
+This library works both Android, IOS, Simulator
 
 ## Installation
 - step 1:
