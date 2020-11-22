@@ -36,6 +36,11 @@ export default function App() {
         });
     }
 
+    function stopConfig() {
+        SmartConfig.stop();
+        setLog('Stopped config');
+    }
+
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Text>{log}</Text>
@@ -45,7 +50,7 @@ export default function App() {
 
                 <View width={20} />
 
-                <Button title={'Stop Config'} onPress={() => SmartConfig.stop()} />
+                <Button title={'Stop Config'} onPress={() => stopConfig()} />
             </View>
 
         </View>

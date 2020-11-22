@@ -17,6 +17,7 @@ Add permission in AndroidManifest.xml
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
 <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+<uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
 ```
 
 ## Usage
@@ -59,6 +60,11 @@ export default function App() {
         });
     }
 
+    function stopConfig() {
+        SmartConfig.stop();
+        setLog('Stopped config');
+    }
+
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Text>{log}</Text>
@@ -68,7 +74,7 @@ export default function App() {
 
                 <View width={20} />
 
-                <Button title={'Stop Config'} onPress={() => SmartConfig.stop()} />
+                <Button title={'Stop Config'} onPress={() => stopConfig()} />
             </View>
 
         </View>
