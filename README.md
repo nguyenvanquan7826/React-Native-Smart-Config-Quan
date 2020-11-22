@@ -22,8 +22,8 @@ Add permission in AndroidManifest.xml
 ## Usage
 ```js
 import SmartConfig from 'react-native-smartconfig-quan';
-import {Button, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import { Button, Text, View } from 'react-native';
+import React, { useState } from 'react';
 
 export default function App() {
 
@@ -44,7 +44,7 @@ export default function App() {
 
         SmartConfig.start(wifiName, wifiBssid, wifiPass, TIME_OUT_SMART_CONFIG, (event) => {
             console.log(event);
-            let {eventName, data} = event;
+            let { eventName, data } = event;
             if (eventName === 'onFoundDevice') {
 
                 foundDevice = true;
@@ -60,19 +60,18 @@ export default function App() {
     }
 
     return (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Text>{log}</Text>
 
-            <View style={{flexDirection: 'row', justifyContent: 'center', marginTop: 100}}>
-                <Button title={'Start Config'} onPress={() => config()}/>
+            <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 100 }}>
+                <Button title={'Start Config'} onPress={() => config()} />
 
-                <View width={20}/>
+                <View width={20} />
 
-                <Button title={'Stop Config'} onPress={() => SmartConfig.stop()}/>
+                <Button title={'Stop Config'} onPress={() => SmartConfig.stop()} />
             </View>
 
         </View>
     );
 }
-
 ```
