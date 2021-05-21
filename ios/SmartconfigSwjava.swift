@@ -87,7 +87,10 @@ class SmartconfigSwjava: RCTEventEmitter {
 
                         if (esptouchResult.getAddressString() != nil) {
                             let ip = esptouchResult.getAddressString();
-                            self.sendEventToRN(eventName: "onFoundDevice", data: ip ?? "")
+                            let bssid = esptouchResult.bssid
+                            let data = "{\"ip\":\"\(ip)\", \"bssid\":\"\(bssid)\"}"
+                            print(data)
+                            self.sendEventToRN(eventName: "onFoundDevice", data: data)
                         }else {
                             self.sendEventToRN(eventName: "onFinishScan", data: "")
                         }

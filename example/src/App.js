@@ -23,11 +23,11 @@ export default function App() {
             console.log(event);
             let { eventName, data } = event;
             if (eventName === 'onFoundDevice') {
-
                 foundDevice = true;
+                data = JSON.parse(data);
 
                 // data in event is ip of ESP
-                setLog('Found device with ip ' + data);
+                setLog('Found device\nip: ' + data.ip + '\nbssid: ' + data.bssid);
             } else {
                 if (!foundDevice) {
                     setLog('Not found');

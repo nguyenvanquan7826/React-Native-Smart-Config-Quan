@@ -15,9 +15,13 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 import esptouch.EsptouchTask;
+import esptouch.IEsptouchListener;
 import esptouch.IEsptouchResult;
 import esptouch.IEsptouchTask;
 
@@ -54,7 +58,7 @@ public class SmartconfigSwjavaModule extends ReactContextBaseJavaModule {
         Log.d(TAG, "ssid " + ssid + ":pass " + pass);
         stop();
         new EsptouchAsyncTask(result -> onFinishScan())
-                .execute(ssid, bssid, pass, Integer.toString(taskCount), Integer.toString(timeout));
+            .execute(ssid, bssid, pass, Integer.toString(taskCount), Integer.toString(timeout));
     }
 
 
@@ -72,20 +76,20 @@ public class SmartconfigSwjavaModule extends ReactContextBaseJavaModule {
         payload.putString("data", data);
         // Get EventEmitter from context and send event thanks to it
         _reactContext
-                .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-                .emit(eventSendToRN, payload);
+            .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+            .emit(eventSendToRN, payload);
     }
 
     private Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message message) {
-            String ip = (String) message.obj;
-            sendToRN("onFoundDevice", ip);
+            String data = (String) message.obj;
+            sendToRN("onFoundDevice", data);
         }
     };
 
-    private void onFoundDevice(String ip) {
-        Message message = handler.obtainMessage(0, ip);
+    private void onFoundDevice(String data) {
+        Message message = handler.obtainMessage(0, data);
         message.sendToTarget();
     }
 
@@ -131,7 +135,12 @@ public class SmartconfigSwjavaModule extends ReactContextBaseJavaModule {
                 timeout = Integer.parseInt(timeoutStr);
                 mEsptouchTask = new EsptouchTask(apSsid, apBssid, apPassword, _reactContext);
                 mEsptouchTask.setPackageBroadcast(false);
-                mEsptouchTask.setEsptouchListener(result -> onFoundDevice(result.getInetAddress().getHostAddress()));
+                mEsptouchTask.setEsptouchListener(result -> {
+                    String ip = result.getInetAddress().getHostAddress();
+                    String bssid = result.getBssid();
+                    String data = "{\"ip\":\"" + ip + "\", \"bssid\":\"" + bssid + "\"}";
+                    onFoundDevice(data);
+                });
             }
             List<IEsptouchResult> resultList = mEsptouchTask.executeForResults(taskCount);
             return resultList;
