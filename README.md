@@ -3,24 +3,30 @@
 This library works both Android, IOS, Simulator
 
 ## Installation
+
 - step 1:
+
 ```sh
 yarn add react-native-smartconfig-quan
 ```
+
 - step 2:
+
 ```sh
 cd ios && pod install
 ```
 
 - step 3:
-Add permission in AndroidManifest.xml
+  Add permission in AndroidManifest.xml
+
 ```xml
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-<uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+<uses-permission android:name="android.permission.INTERNET"/>
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+<uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
 ```
 
 ## Usage
+
 ```js
 import SmartConfig from 'react-native-smartconfig-quan';
 import { Button, Text, View } from 'react-native';
@@ -47,11 +53,11 @@ export default function App() {
             console.log(event);
             let { eventName, data } = event;
             if (eventName === 'onFoundDevice') {
-
                 foundDevice = true;
+                data = JSON.parse(data);
 
                 // data in event is ip of ESP
-                setLog('Found device with ip ' + data);
+                setLog('Found device\nip: ' + data.ip + '\nbssid: ' + data.bssid);
             } else {
                 if (!foundDevice) {
                     setLog('Not found');
@@ -70,11 +76,11 @@ export default function App() {
             <Text>{log}</Text>
 
             <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 100 }}>
-                <Button title={'Start Config'} onPress={() => config()} />
+                <Button title={'Start Config'} onPress={() => config()}/>
 
-                <View width={20} />
+                <View width={20}/>
 
-                <Button title={'Stop Config'} onPress={() => stopConfig()} />
+                <Button title={'Stop Config'} onPress={() => stopConfig()}/>
             </View>
 
         </View>
