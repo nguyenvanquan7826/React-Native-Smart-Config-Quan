@@ -86,8 +86,8 @@ class SmartconfigSwjava: RCTEventEmitter {
                         // IP拼接
 
                         if (esptouchResult.getAddressString() != nil) {
-                            let ip = esptouchResult.getAddressString();
-                            let bssid = esptouchResult.bssid
+                            let ip = esptouchResult.getAddressString() ?? ""
+                            let bssid = esptouchResult.bssid ?? ""
                             let data = "{\"ip\":\"" + ip + "\", \"bssid\":\"" + bssid + "\"}"
                             self.sendEventToRN(eventName: "onFoundDevice", data: data)
                         }else {
