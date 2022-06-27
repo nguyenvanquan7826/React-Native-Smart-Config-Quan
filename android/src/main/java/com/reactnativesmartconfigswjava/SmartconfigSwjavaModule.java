@@ -45,6 +45,15 @@ public class SmartconfigSwjavaModule extends ReactContextBaseJavaModule {
         return "SmartconfigSwjava";
     }
 
+    // Required for rn built in EventEmitter Calls.
+    @ReactMethod
+    public void addListener(String eventName) {
+    }
+    
+    @ReactMethod
+    public void removeListeners(Integer count) {
+    }
+
     @ReactMethod
     public void stop() {
         if (mEsptouchTask != null) {
