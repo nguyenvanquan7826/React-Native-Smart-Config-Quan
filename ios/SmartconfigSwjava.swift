@@ -16,6 +16,10 @@ class SmartconfigSwjava: RCTEventEmitter {
     @objc var wifiPass = ""
     @objc var wifiName = ""
     var ipResult = "";
+    
+    @objc override static func requiresMainQueueSetup() -> Bool {
+        return false
+    }
 
     init(fromString string: NSString) {
         super.init()
