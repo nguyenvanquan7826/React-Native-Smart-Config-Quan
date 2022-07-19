@@ -1,6 +1,6 @@
 {
   "name": "react-native-smartconfig-quan",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "no",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
